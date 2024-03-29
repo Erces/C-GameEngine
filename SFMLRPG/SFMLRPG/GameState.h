@@ -3,7 +3,7 @@
 #include "State.h"
 class GameState: public State{
 public:
-	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys);
+	GameState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states);
 	virtual ~GameState();
 
 	//Functions	

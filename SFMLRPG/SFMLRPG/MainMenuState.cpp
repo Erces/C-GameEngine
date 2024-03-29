@@ -1,6 +1,6 @@
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys) : State(window, supportedKeys)
+MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states) : State(window, supportedKeys,states)
 {
 	this->InitFonts();
 	this->InitKeybinds();
@@ -12,7 +12,7 @@ MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int
 
 void MainMenuState::EndState()
 {
-
+	std::cout << "Ending main menu scene!" << "\n";
 }
 
 void MainMenuState::UpdateInput(const float& dt)
@@ -27,6 +27,16 @@ void MainMenuState::UpdateButtons()
 	{
 		it.second->Update(this->mousePosView);
 	}
+	if (this->buttons["GAME_STATE"]->IsPressed())
+	{
+		this->states->push(new GameState(this->window, this->supportedKeys, this->states));
+
+	}
+
+	if (this->buttons["EXIT"]->IsPressed())
+	{
+		this->quit = true;
+	}
 
 }
 
@@ -40,10 +50,7 @@ void MainMenuState::Update(const float& dt)
 
 
 	//Quit
-	if (this->buttons["EXIT"]->IsPressed()) 
-	{
-		this->quit = true;
-	}
+	
 }
 void MainMenuState::Render(sf::RenderTarget* target)
 {
@@ -70,7 +77,7 @@ void MainMenuState::InitFonts()
 }
 void MainMenuState::InitKeybinds()
 {
-	std::ifstream ifs("Config/gamestate_keybinds.ini");
+	std::ifstream ifs("Config/mainmenustate_keybinds.ini");
 	if (ifs.is_open()) {
 		std::string key = "";
 		std::string keyValue = "";
