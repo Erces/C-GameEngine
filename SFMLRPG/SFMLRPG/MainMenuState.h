@@ -20,9 +20,12 @@ public:
 private:
 	sf::RectangleShape bg;
 	sf::Font font;
+	sf::Texture bgTexture;
 
 	std::map<std::string, Button*> buttons;
 
+	void InitVariables();
+	void InitBackground();
 	void InitFonts();
 	void InitKeybinds();
 	void InitButtons();

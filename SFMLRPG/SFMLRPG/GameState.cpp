@@ -11,7 +11,7 @@
 
 	void GameState::UpdateInput(const float& dt)
 	{
-		this->CheckForQuit();
+		//this->CheckForQuit();
 
 
 		//Movement
@@ -23,6 +23,8 @@
 			this->player.Move(dt, 0.0f, -1.0f);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("MOVE_DOWN"))))
 			this->player.Move(dt, 0.0f, 1.0f);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(this->keybinds.at("ESCAPE"))))
+			this->quit = true;
 	}
 
 	void GameState::Update(const float& dt)

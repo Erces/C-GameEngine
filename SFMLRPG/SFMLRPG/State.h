@@ -27,6 +27,7 @@ public:
 	virtual ~State();
 
 	const bool& GetQuit() const;
+	
 
 	virtual void CheckForQuit();
 	virtual void EndState() = 0;
